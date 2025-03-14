@@ -1,26 +1,77 @@
-<html>
-    <head>
-        <!--HTML file auto generated using EmulatorJS codehelper-->
-        <style>
-            body, html {
-                margin: 0;
-                padding: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div style="width:100%;height:100%;max-width:100%">
-            <div id="game"></div>
-        </div>
-        <script>
-            EJS_player = "#game";
-            EJS_core = "snes";
-            EJS_gameName = "Super Mario Kart";
-            EJS_color = "#001f4d";
-            EJS_startOnLoaded = true;
-            EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
-            EJS_gameUrl = "../SuperMarioKart.smc";
-        </script>
-        <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korbeli's Emulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Poppins Font Import -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #2C3E50; /* Dark blue-grey */
+            text-align: center;
+            color: #ECF0F1; /* Light gray */
+            font-family: 'Poppins', sans-serif; /* Poppins font */
+        }
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #E74C3C; /* Bright red for emphasis */
+            margin: 20px 0;
+        }
+        #game {
+            width: 100%;
+            height: 90vh;
+            background-color: #34495E; /* Darker background for game display */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #BDC3C7; /* Soft gray */
+        }
+        #gameTitle {
+            font-weight: 500;
+            font-size: 1.5em;
+            color: #F39C12; /* Yellow-orange for title */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Korbeli's Emulator</h1>
+    <p>Playing: <span id="gameTitle">Loading...</span></p>
+    
+    <div id="game"></div>
+
+    <script>
+        // Get game name from URL (e.g., ?game=SuperMarioKart.smc)
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameFile = urlParams.get("game") || "SuperMarioKart.smc"; // Default file
+
+        // Remove file extension
+        let formattedTitle = gameFile.replace(/\.(smc|sfc)$/, "");
+
+        // Insert spaces before capital letters (except the first letter)
+        formattedTitle = formattedTitle.replace(/([a-z])([A-Z])/g, "$1 $2");
+
+        // Set emulator parameters
+        EJS_player = "#game";
+        EJS_core = "snes"; 
+        EJS_gameName = formattedTitle;
+        EJS_color = "#2C3E50"; /* Dark blue-grey */
+        EJS_startOnLoaded = true;
+        EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+
+        // Corrected absolute path to the ROM file
+        EJS_gameUrl = `https://ricecake1111113.github.io/freckleROM/snes/${gameFile}`;
+
+        // Display formatted game title
+        document.getElementById("gameTitle").innerText = formattedTitle;
+    </script>
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
+</body>
 </html>
